@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop__customers
+    description: ""
+    columns:
+      - name: customer_id
+        data_type: bigint
+        description: ""
+        data_tests:
+          - unique
+          - not_null
+
+      - name: first_name
+        data_type: string
+        description: ""
+
+      - name: last_name
+        data_type: string
+        description: ""
