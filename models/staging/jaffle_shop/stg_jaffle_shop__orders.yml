@@ -2,18 +2,18 @@ version: 2
 
 models:
   - name: stg_jaffle_shop__orders
-    description: ""
+    description: "Shop staging model"
     columns:
       - name: order_id
         data_type: bigint
-        description: ""
+        description: "Primary key for order, one for each order"
         data_tests:
           - unique
           - not_null
 
       - name: customer_id
         data_type: bigint
-        description: ""
+        description: "Foreign key from customer staging model"
         data_tests:
           - not_null
           - relationships:
@@ -23,11 +23,11 @@ models:
 
       - name: order_date
         data_type: date
-        description: ""
+        description: "Date of the order"
 
       - name: order_status
         data_type: string
-        description: ""
+        description: "{{ doc('order_status') }}"
         data_tests:
           - accepted_values:
               arguments:
