@@ -5,4 +5,4 @@ Payment Status:
 
 - fail: the payment is failed
 
-{ %enddocs %}
+{% enddocs %}

@@ -27,7 +27,7 @@ models:
 
       - name: payment_status
         data_type: string
-        description: "{{ doc(payment_status) }}"
+        description: "{{ doc('payment_status') }}"
 
       - name: payment_amount
         data_type: bigint
