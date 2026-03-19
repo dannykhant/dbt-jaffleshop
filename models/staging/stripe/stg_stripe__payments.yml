@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_stripe__payments
+    description: "Payment staging model for order"
+    columns:
+      - name: payment_id
+        data_type: bigint
+        description: "Primary key, one for each payment transaction"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        data_type: bigint
+        description: "Foreign key of the order"
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: 
+                to: ref('stg_jaffle_shop__orders')
+                field: order_id
+
+      - name: payment_method
+        data_type: string
+        description: "Payment method"
+
+      - name: payment_status
+        data_type: string
+        description: "{{ doc(payment_status) }}"
+
+      - name: payment_amount
+        data_type: bigint
+        description: "Amount of payment"
+
+      - name: payment_date
+        data_type: date
+        description: "Date of payment"

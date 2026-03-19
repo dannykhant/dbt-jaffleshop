@@ -1,0 +1,20 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop__customers
+    description: "Customer staging model"
+    columns:
+      - name: customer_id
+        data_type: bigint
+        description: "Primary key for customer, one for each customer"
+        data_tests:
+          - unique
+          - not_null
+
+      - name: first_name
+        data_type: string
+        description: "Customer first name"
+
+      - name: last_name
+        data_type: string
+        description: "Customer last name"
