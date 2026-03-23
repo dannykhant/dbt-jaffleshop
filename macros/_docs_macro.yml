@@ -8,3 +8,16 @@ macros:
       - name: decimal_places
         type: integer
         description: The custom decimal places for dollars
+
+  - name: grant_select
+    description: Grant select permission on the schema
+    arguments:
+      - name: catalog
+        type: string
+        description: The catalog name, default=target.catalog
+      - name: schema
+        type: string
+        description: The schema name, default=target.schema
+      - name: principal
+        type: string
+        description: The principal name
