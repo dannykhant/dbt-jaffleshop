@@ -21,3 +21,19 @@ macros:
       - name: principal
         type: string
         description: The principal name
+
+  - name: clean_stale_models
+    description: Clean the stale models
+    arguments:
+      - name: catalog_name
+        type: string
+        description: The catalog name
+      - name: schema_name
+        type: string
+        description: The schema name
+      - name: days
+        type: integer
+        description: The number of days that the model is stale
+      - name: dry_run
+        type: boolean
+        description: The default value is True to dry run first
