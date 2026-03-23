@@ -1,0 +1,10 @@
+macros:
+  - name: cents_to_dollars
+    description: Converting cents to dollars with custom decimal places
+    arguments:
+      - name: column_name
+        type: column
+        description: The column of the amount in cents
+      - name: decimal_places
+        type: integer
+        description: The custom decimal places for dollars
