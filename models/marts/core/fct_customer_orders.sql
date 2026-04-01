@@ -1,5 +1,5 @@
 with
-    customers as (select * from {{ ref("stg_jaffle_shop__customers") }}),
+    customers as (select * from {{ ref("int_customers") }}),
 
     paid_orders as (select * from {{ ref("int_orders") }}),
 
@@ -50,34 +50,10 @@ with
             first_value(paid_orders.order_date) over (
                 partition by paid_orders.customer_id
                 order by paid_orders.order_date, paid_orders.order_id
-            ) as fdos,
-
-            -- order count
-            count(*) over (partition by paid_orders.customer_id) as order_count,
-
-            -- non returned order count
-            sum(
-                nvl2(paid_orders.valid_order_date, 1, 0)
-            ) over(partition by paid_orders.customer_id) as non_returned_order_count,
-
-            -- non returned order value
-            sum(
-                nvl2(paid_orders.valid_order_date, paid_orders.total_amount_paid, 0)
-            ) over(partition by paid_orders.customer_id) as non_returned_order_value
+            ) as fdos
 
         from paid_orders
         left join customers on paid_orders.customer_id = customers.customer_id
-    ),
-
-    avg_order_values as (
-
-        select
-
-            *,
-            non_returned_order_value / non_returned_order_count as avg_non_returned_order_value
-
-        from customer_orders
-
     ),
 
     final as (
@@ -98,7 +74,7 @@ with
             customer_lifetime_value,
             fdos
 
-        from avg_order_values
+        from customer_orders
 
     )
 
