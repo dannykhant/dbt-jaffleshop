@@ -23,8 +23,8 @@ with
                 nvl2(paid_orders.valid_order_date, paid_orders.total_amount_paid, 0)
             ) as non_returned_order_value
 
-        from paid_orders
-        left join raw_customers on paid_orders.customer_id = raw_customers.customer_id
+        from raw_customers
+        left join paid_orders on raw_customers.customer_id = paid_orders.customer_id
         group by 
             paid_orders.customer_id,
             raw_customers.first_name,
@@ -36,7 +36,10 @@ with
         select
 
             *,
-            non_returned_order_value / non_returned_order_count as avg_non_returned_order_value
+            {{ function('safe_divide') }}(
+                non_returned_order_value, 
+                non_returned_order_count
+            ) as avg_non_returned_order_value
 
         from customers
 
