@@ -3,7 +3,7 @@ with
 
     paid_orders as (select * from {{ ref("int_orders") }}),
 
-    final as (
+    customer_orders as (
 
         select
             paid_orders.order_id,
@@ -50,10 +50,56 @@ with
             first_value(paid_orders.order_date) over (
                 partition by paid_orders.customer_id
                 order by paid_orders.order_date, paid_orders.order_id
-            ) as fdos
+            ) as fdos,
+
+            -- order count
+            count(*) over (partition by paid_orders.customer_id) as order_count,
+
+            -- non returned order count
+            sum(
+                nvl2(paid_orders.valid_order_date, 1, 0)
+            ) over(partition by paid_orders.customer_id) as non_returned_order_count,
+
+            -- non returned order value
+            sum(
+                nvl2(paid_orders.valid_order_date, paid_orders.total_amount_paid, 0)
+            ) over(partition by paid_orders.customer_id) as non_returned_order_value
+
         from paid_orders
         left join customers on paid_orders.customer_id = customers.customer_id
+    ),
+
+    avg_order_values as (
+
+        select
+
+            *,
+            non_returned_order_value / non_returned_order_count as avg_non_returned_order_value
+
+        from customer_orders
+
+    ),
+
+    final as (
+
+        select
+
+            customer_id,
+            order_id,
+            order_date as order_placed_at,
+            order_status,
+            total_amount_paid,
+            payment_finalized_date,
+            first_name as customer_first_name,
+            last_name as customer_last_name,
+            transaction_seq,
+            customer_sales_seq,
+            nvsr,
+            customer_lifetime_value,
+            fdos
+
+        from avg_order_values
+
     )
 
-select *
-from final
+select * from final

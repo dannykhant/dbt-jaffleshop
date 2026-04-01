@@ -2,13 +2,13 @@ with
 
     orders as (select * from {{ ref("stg_jaffle_shop__orders") }}),
 
-    payments as (select * from {{ ref("stg_stripe__payment") }}),
+    payments as (select * from {{ ref("stg_stripe__payments") }}),
 
     completed_payments as (
 
         select
             order_id,
-            max(payment_created) as payment_finalized_date,
+            max(payment_date) as payment_finalized_date,
             sum(payment_amount) as total_amount_paid
         from payments
         where payment_status <> 'fail'
@@ -24,7 +24,12 @@ with
             orders.order_date,
             orders.order_status,
             completed_payments.total_amount_paid,
-            completed_payments.payment_finalized_date
+            completed_payments.payment_finalized_date,
+            case 
+                when orders.order_status not in ('returned','return_pending') 
+                then orders.order_date 
+            end as valid_order_date
+
         from orders
         left join completed_payments on orders.order_id = completed_payments.order_id
     )
