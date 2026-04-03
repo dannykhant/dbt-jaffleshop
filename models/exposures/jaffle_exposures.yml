@@ -1,0 +1,24 @@
+exposures:
+  - name: orders_data
+    label: Orders Data
+    type: notebook
+    maturity: high
+    url: https://tinyurl.com/jaffle-shop-reporting
+    description: 'Exposure for orders data'
+    owner:
+      name: Danny Khant
+      email: dannypmkhant@gmail.com
+    depends_on:
+      - ref('fct_orders')
+
+  - name: customers_data
+    label: Customers Data
+    type: notebook
+    maturity: high
+    url: https://tinyurl.com/jaffle-shop-reporting
+    description: 'Exposure for customers data'
+    owner:
+      name: Danny Khant
+      email: dannypmkhant@gmail.com
+    depends_on:
+      - ref('dim_customers')
