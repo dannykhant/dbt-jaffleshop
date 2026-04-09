@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop_v2__supplies
+    description: ""
+    columns:
+      - name: supply_id
+        data_type: string
+        description: ""
+
+      - name: supply_name
+        data_type: string
+        description: ""
+
+      - name: product_id
+        data_type: string
+        description: ""
+
+      - name: supply_cost
+        data_type: double
+        description: ""
+
+      - name: is_perishable
+        data_type: boolean
+        description: ""
