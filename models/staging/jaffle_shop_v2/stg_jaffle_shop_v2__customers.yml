@@ -1,0 +1,13 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop_v2__customers
+    description: ""
+    columns:
+      - name: customer_id
+        data_type: string
+        description: ""
+
+      - name: full_name
+        data_type: string
+        description: ""

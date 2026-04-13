@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop_v2__order_items
+    description: ""
+    columns:
+      - name: order_item_id
+        data_type: string
+        description: ""
+
+      - name: order_id
+        data_type: string
+        description: ""
+
+      - name: product_id
+        data_type: string
+        description: ""

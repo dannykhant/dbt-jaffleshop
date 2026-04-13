@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop_v2__products
+    description: ""
+    columns:
+      - name: product_id
+        data_type: string
+        description: ""
+
+      - name: product_name
+        data_type: string
+        description: ""
+
+      - name: product_type
+        data_type: string
+        description: ""
+
+      - name: product_desc
+        data_type: string
+        description: ""
+
+      - name: product_price
+        data_type: int
+        description: ""

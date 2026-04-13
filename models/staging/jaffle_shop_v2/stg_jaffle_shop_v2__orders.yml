@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop_v2__orders
+    description: ""
+    columns:
+      - name: order_id
+        data_type: string
+        description: ""
+
+      - name: customer_id
+        data_type: string
+        description: ""
+
+      - name: store_id
+        data_type: string
+        description: ""
+
+      - name: order_date
+        data_type: timestamp
+        description: ""
+
+      - name: order_subtotal
+        data_type: int
+        description: ""
+
+      - name: tax_paid
+        data_type: int
+        description: ""
+
+      - name: order_total
+        data_type: int
+        description: ""

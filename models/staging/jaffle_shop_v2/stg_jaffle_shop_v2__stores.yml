@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_jaffle_shop_v2__stores
+    description: ""
+    columns:
+      - name: store_id
+        data_type: string
+        description: ""
+
+      - name: store_name
+        data_type: string
+        description: ""
+
+      - name: store_opened_at
+        data_type: timestamp
+        description: ""
+
+      - name: tax_rate
+        data_type: double
+        description: ""

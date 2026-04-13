@@ -1,0 +1,66 @@
+version: 2
+
+models:
+  - name: fct_jfv2_orders
+    latest_version: 1
+    config:
+      contract: 
+        enforced: true
+      group: finance
+      access: public
+    description: ""
+    columns:
+      - name: order_id
+        data_type: string
+        description: ""
+        constraints:
+          - type: not_null
+          - type: unique
+
+      - name: customer_id
+        data_type: string
+        description: ""
+
+      - name: store_id
+        data_type: string
+        description: ""
+
+      - name: order_date
+        data_type: timestamp
+        description: ""
+
+      - name: store_name
+        data_type: string
+        description: ""
+
+      - name: tax_rate
+        data_type: double
+        description: ""
+
+      - name: order_subtotal
+        data_type: int
+        description: ""
+
+      - name: tax_paid
+        data_type: int
+        description: ""
+
+      - name: order_total
+        data_type: int
+        description: ""
+
+    versions:
+      - v: 1
+        config:
+          alias: fct_jfv2_orders
+
+      - v: 2
+        columns:
+          - name: order_amount
+            data_type: int
+
+          - name: order_date
+            data_type: date
+
+          - include: all
+            exclude: [order_total]
