@@ -6,6 +6,8 @@ models:
     config:
       contract: 
         enforced: true
+      group: finance
+      access: public
     description: ""
     columns:
       - name: order_id
