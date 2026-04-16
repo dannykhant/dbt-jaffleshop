@@ -1,0 +1,62 @@
+version: 2
+
+models:
+  - name: fct_customer_orders
+    description: ""
+    columns:
+      - name: customer_id
+        data_type: bigint
+        description: ""
+        data_tests:
+          - not_null
+
+      - name: order_id
+        data_type: bigint
+        description: ""
+        data_tests:
+          - unique
+          - not_null
+
+      - name: order_placed_at
+        data_type: date
+        description: ""
+
+      - name: order_status
+        data_type: string
+        description: ""
+
+      - name: total_amount_paid
+        data_type: decimal(37,4)
+        description: ""
+
+      - name: payment_finalized_date
+        data_type: date
+        description: ""
+
+      - name: customer_first_name
+        data_type: string
+        description: ""
+
+      - name: customer_last_name
+        data_type: string
+        description: ""
+
+      - name: transaction_seq
+        data_type: int
+        description: ""
+
+      - name: customer_sales_seq
+        data_type: int
+        description: ""
+
+      - name: nvsr
+        data_type: string
+        description: ""
+
+      - name: customer_lifetime_value
+        data_type: decimal(38,4)
+        description: ""
+
+      - name: fdos
+        data_type: date
+        description: ""
