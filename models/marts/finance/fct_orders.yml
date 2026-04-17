@@ -2,18 +2,23 @@ version: 2
 
 models:
   - name: fct_orders
-    description: ""
+    description: "One record per order"
+    tests:
+      - dbt_utils.expression_is_true:
+          arguments:
+            expression: "payment_amount >= 0"
+
     columns:
       - name: order_id
         data_type: bigint
-        description: ""
+        description: "Primary key"
         data_tests:
           - unique
           - not_null
 
       - name: customer_id
         data_type: bigint
-        description: ""
+        description: "Foreign key"
         data_tests:
           - not_null
           - relationships:
@@ -23,8 +28,20 @@ models:
 
       - name: order_date
         data_type: date
-        description: ""
+        description: "Date of the order"
 
       - name: payment_amount
         data_type: decimal(37,4)
-        description: ""
+        description: "Payment amount of the order"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments: 
+                min_value: 0
+                row_condition: "order_id is not null"
+                strictly: false
+          - dbt_expectations.expect_column_mean_to_be_between:
+              arguments: 
+                min_value: 1
+                group_by: [customer_id]
+                row_condition: "order_id is not null"
+                strictly: false
