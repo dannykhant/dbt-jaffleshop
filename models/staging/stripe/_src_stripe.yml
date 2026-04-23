@@ -15,3 +15,13 @@ sources:
             error_after: 
               count: 7
               period: day
+        columns:
+          - name: id
+            data_tests:
+              - unique:
+                  config: 
+                    warn_if: ">10"
+                    error_if: ">100"
+                    where: "paymentmethod = 'success'"
+                    limit: 10
+                    store_failures: true
